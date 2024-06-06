@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ibm.record.ClienteDTO;
 import com.ibm.record.ClienteRecord;
+import com.ibm.record.DepositoRecord;
 import com.ibm.service.ClienteService;
 
 import jakarta.validation.Valid;
@@ -32,5 +33,11 @@ public class ClienteController {
 	public ResponseEntity<ClienteDTO> buscar(@RequestParam("agencia") String agencia, 
 			@RequestParam("conta") String conta, @RequestParam("senha") String senha) {
 		return ResponseEntity.ok(clienteService.buscar(agencia, conta, senha));
+	}
+	
+	@PostMapping("/depositar")
+	public ResponseEntity<?> depositar(@Valid @RequestBody DepositoRecord depositoRecord) {
+		clienteService.depositar(depositoRecord);
+		return ResponseEntity.ok().build();
 	}
 }

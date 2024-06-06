@@ -15,10 +15,10 @@ import com.ibm.service.ContaService;
 
 @Service
 public class ContaServiceImpl implements ContaService {
-	
+
 	@Autowired
 	private ContaRepository contaRepository;
-	
+
 	@Autowired
 	private AgenciaService agenciaService;
 
@@ -27,6 +27,15 @@ public class ContaServiceImpl implements ContaService {
 		List<Agencia> agencias = agenciaService.findAll();
 		// TODO: referenciar conta a agencia
 		return contaRepository.save(new Conta(contaRecord.numero(), agencias.get(0), BigDecimal.ZERO, false));
+	}
+
+	@Override
+	public void depositar(BigDecimal valor, Long numeroConta, Long idCliente) {
+		if (valor.compareTo(BigDecimal.ZERO) >= 1)
+			contaRepository.depositar(valor, numeroConta, idCliente);
+		else
+			// TODO: lançar exceção
+			System.out.println("Deposito tem que ser maior que 0");
 	}
 
 }

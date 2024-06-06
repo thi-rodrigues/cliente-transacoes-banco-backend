@@ -10,7 +10,9 @@ import com.ibm.domain.Cliente;
 import com.ibm.domain.Conta;
 import com.ibm.record.ClienteDTO;
 import com.ibm.record.ClienteRecord;
+import com.ibm.record.DepositoRecord;
 import com.ibm.repository.ClienteRepository;
+import com.ibm.repository.ContaRepository;
 import com.ibm.service.ClienteService;
 import com.ibm.service.ContaService;
 
@@ -18,10 +20,10 @@ import jakarta.validation.Valid;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
-	
+
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
+
 	@Autowired
 	private ContaService contaService;
 
@@ -30,10 +32,10 @@ public class ClienteServiceImpl implements ClienteService {
 		Cliente cliente = new Cliente();
 		// TODO: senha
 		BeanUtils.copyProperties(clienteRecord, cliente);
-		
+
 		Conta conta = contaService.save(clienteRecord.conta());
 		cliente.setConta(conta);
-		
+
 		clienteRepository.save(cliente);
 		return clienteRecord;
 	}
@@ -42,10 +44,14 @@ public class ClienteServiceImpl implements ClienteService {
 	public ClienteDTO buscar(String agencia, String conta, String senha) {
 		Optional<Cliente> cliente = clienteRepository.buscar(agencia, conta, senha);
 		ClienteDTO clienteDTO = new ClienteDTO();
-		
+
 		cliente.ifPresent(c -> BeanUtils.copyProperties(c, clienteDTO));
-		
 		return clienteDTO;
+	}
+
+	@Override
+	public void depositar(DepositoRecord depositoRecord) {
+		contaService.depositar(depositoRecord.valor(), depositoRecord.numeroConta(), depositoRecord.idCliente());
 	}
 
 }
