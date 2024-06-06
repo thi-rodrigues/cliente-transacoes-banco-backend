@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ibm.record.ClienteDTO;
 import com.ibm.record.ClienteRecord;
-import com.ibm.record.DepositoRecord;
+import com.ibm.record.TransacaoRecord;
 import com.ibm.service.ClienteService;
 
 import jakarta.validation.Valid;
@@ -36,8 +36,14 @@ public class ClienteController {
 	}
 	
 	@PostMapping("/depositar")
-	public ResponseEntity<?> depositar(@Valid @RequestBody DepositoRecord depositoRecord) {
-		clienteService.depositar(depositoRecord);
+	public ResponseEntity<?> depositar(@Valid @RequestBody TransacaoRecord transacaoRecord) {
+		clienteService.depositar(transacaoRecord);
+		return ResponseEntity.ok().build();
+	}
+	
+	@PostMapping("/debitar")
+	public ResponseEntity<?> debitar(@Valid @RequestBody TransacaoRecord transacaoRecord) {
+		clienteService.debitar(transacaoRecord);
 		return ResponseEntity.ok().build();
 	}
 }

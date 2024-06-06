@@ -21,4 +21,14 @@ public interface ContaRepository extends JpaRepository<Conta, Long> {
 			+ " WHERE c.numero = :numeroConta AND c.id = "
 			+ " ( Select cli.id from Cliente cli where cli.id = :idCliente )")
 	void depositar(BigDecimal valor, Long numeroConta, Long idCliente);
+	
+	@Modifying
+	@Transactional
+	@Query("UPDATE Conta c "
+			+ " SET c.saldo = :valor "
+			+ " WHERE c.numero = :numeroConta AND c.id = "
+			+ " ( Select cli.id from Cliente cli where cli.id = :idCliente )")
+	void debitar(BigDecimal valor, Long numeroConta, Long idCliente);
+
+	Conta findByNumero(Long numeroConta);
 }

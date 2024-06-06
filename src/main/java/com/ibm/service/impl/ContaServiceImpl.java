@@ -21,7 +21,7 @@ public class ContaServiceImpl implements ContaService {
 
 	@Autowired
 	private AgenciaService agenciaService;
-
+	
 	@Override
 	public Conta save(ContaRecord contaRecord) {
 		List<Agencia> agencias = agenciaService.findAll();
@@ -31,11 +31,28 @@ public class ContaServiceImpl implements ContaService {
 
 	@Override
 	public void depositar(BigDecimal valor, Long numeroConta, Long idCliente) {
+		Conta conta = buscarConta(numeroConta);
+		
 		if (valor.compareTo(BigDecimal.ZERO) >= 1)
-			contaRepository.depositar(valor, numeroConta, idCliente);
+			contaRepository.depositar(conta.getSaldo().add(valor), numeroConta, idCliente);
 		else
 			// TODO: lançar exceção
 			System.out.println("Deposito tem que ser maior que 0");
+	}
+
+	@Override
+	public void debitar(BigDecimal valor, Long numeroConta, Long idCliente) {
+		Conta conta = buscarConta(numeroConta);
+		
+		if (valor.compareTo(BigDecimal.ZERO) >= 1 && conta.getSaldo().compareTo(BigDecimal.ZERO) >=1 )
+			contaRepository.debitar(conta.getSaldo().subtract(valor), numeroConta, idCliente);
+		else
+			// TODO: lançar exceção
+			System.out.println("Conta com saldo menor ou igual a 0");
+	}
+	
+	private Conta buscarConta(Long numeroConta) {
+		return contaRepository.findByNumero(numeroConta);
 	}
 
 }

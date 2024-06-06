@@ -10,9 +10,8 @@ import com.ibm.domain.Cliente;
 import com.ibm.domain.Conta;
 import com.ibm.record.ClienteDTO;
 import com.ibm.record.ClienteRecord;
-import com.ibm.record.DepositoRecord;
+import com.ibm.record.TransacaoRecord;
 import com.ibm.repository.ClienteRepository;
-import com.ibm.repository.ContaRepository;
 import com.ibm.service.ClienteService;
 import com.ibm.service.ContaService;
 
@@ -48,10 +47,15 @@ public class ClienteServiceImpl implements ClienteService {
 		cliente.ifPresent(c -> BeanUtils.copyProperties(c, clienteDTO));
 		return clienteDTO;
 	}
+	
+	@Override
+	public void depositar(TransacaoRecord transacaoRecord) {
+		contaService.depositar(transacaoRecord.valor(), transacaoRecord.numeroConta(), transacaoRecord.idCliente());
+	}
 
 	@Override
-	public void depositar(DepositoRecord depositoRecord) {
-		contaService.depositar(depositoRecord.valor(), depositoRecord.numeroConta(), depositoRecord.idCliente());
+	public void debitar(@Valid TransacaoRecord transacaoRecord) {
+		contaService.debitar(transacaoRecord.valor(), transacaoRecord.numeroConta(), transacaoRecord.idCliente());
 	}
 
 }

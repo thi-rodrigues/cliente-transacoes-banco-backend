@@ -10,5 +10,7 @@ public interface ContaService {
 	Conta save(ContaRecord contaRecord);
 	
 	void depositar(BigDecimal valor, Long numeroConta, Long idCliente);
+	
+	void debitar(BigDecimal valor, Long numeroConta, Long idCliente);
 
 }
