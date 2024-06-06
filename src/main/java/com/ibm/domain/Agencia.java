@@ -3,6 +3,8 @@ package com.ibm.domain;
 import java.io.Serializable;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,7 +33,8 @@ public class Agencia implements Serializable {
 	@NotNull
 	private Long numero;
 	
-	@OneToMany(mappedBy = "agencia")
-	private Set<Conta> conta;
+//	@OneToMany(mappedBy = "agencia")
+//	@JsonProperty("contas")
+//	private Set<Conta> conta;
 
 }

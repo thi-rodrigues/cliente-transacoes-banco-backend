@@ -1,11 +1,14 @@
 package com.ibm.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ibm.domain.Cliente;
 import com.ibm.domain.Conta;
+import com.ibm.record.ClienteDTO;
 import com.ibm.record.ClienteRecord;
 import com.ibm.repository.ClienteRepository;
 import com.ibm.service.ClienteService;
@@ -25,15 +28,24 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public ClienteRecord save(@Valid ClienteRecord clienteRecord) {
 		Cliente cliente = new Cliente();
-		Conta conta = new Conta();
-		BeanUtils.copyProperties(clienteRecord.conta(), conta);
+		// TODO: senha
 		BeanUtils.copyProperties(clienteRecord, cliente);
 		
-		Conta save = contaService.save(conta);
-		cliente.setConta(save);
+		Conta conta = contaService.save(clienteRecord.conta());
+		cliente.setConta(conta);
 		
 		clienteRepository.save(cliente);
 		return clienteRecord;
+	}
+
+	@Override
+	public ClienteDTO buscar(String agencia, String conta, String senha) {
+		Optional<Cliente> cliente = clienteRepository.buscar(agencia, conta, senha);
+		ClienteDTO clienteDTO = new ClienteDTO();
+		
+		cliente.ifPresent(c -> BeanUtils.copyProperties(c, clienteDTO));
+		
+		return clienteDTO;
 	}
 
 }

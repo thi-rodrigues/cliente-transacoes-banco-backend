@@ -1,11 +1,10 @@
 package com.ibm.service;
 
 import com.ibm.domain.Conta;
-
-import jakarta.validation.Valid;
+import com.ibm.record.ContaRecord;
 
 public interface ContaService {
 
-	Conta save(@Valid Conta conta);
+	Conta save(ContaRecord contaRecord);
 
 }

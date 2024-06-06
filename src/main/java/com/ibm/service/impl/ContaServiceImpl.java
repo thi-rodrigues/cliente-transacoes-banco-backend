@@ -8,11 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.ibm.domain.Agencia;
 import com.ibm.domain.Conta;
+import com.ibm.record.ContaRecord;
 import com.ibm.repository.ContaRepository;
 import com.ibm.service.AgenciaService;
 import com.ibm.service.ContaService;
-
-import jakarta.validation.Valid;
 
 @Service
 public class ContaServiceImpl implements ContaService {
@@ -22,12 +21,12 @@ public class ContaServiceImpl implements ContaService {
 	
 	@Autowired
 	private AgenciaService agenciaService;
-	
 
 	@Override
-	public Conta save(@Valid Conta conta) {
+	public Conta save(ContaRecord contaRecord) {
 		List<Agencia> agencias = agenciaService.findAll();
-		return contaRepository.save(new Conta(conta.getNumero(), agencias.get(0), BigDecimal.ZERO, false));
+		// TODO: referenciar conta a agencia
+		return contaRepository.save(new Conta(contaRecord.numero(), agencias.get(0), BigDecimal.ZERO, false));
 	}
 
 }
