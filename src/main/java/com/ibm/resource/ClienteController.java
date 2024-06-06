@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ibm.record.ClienteRecord;
-import com.ibm.service.ContaService;
+import com.ibm.service.ClienteService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/conta")
-public class ContaController {
+@RequestMapping("/cliente")
+public class ClienteController {
 
 	@Autowired
-	private ContaService contaService;
+	private ClienteService clienteService;
 
 	@PostMapping("/save")
 	public ResponseEntity<ClienteRecord> save(@Valid @RequestBody ClienteRecord clienteRecord) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(contaService.save(clienteRecord));
+		return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(clienteRecord));
 	}
 }

@@ -3,7 +3,6 @@ package com.ibm.domain;
 import java.io.Serializable;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,7 +31,7 @@ public class Agencia implements Serializable {
 	@NotNull
 	private Long numero;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "agencia")
+	@OneToMany(mappedBy = "agencia")
 	private Set<Conta> conta;
 
 }

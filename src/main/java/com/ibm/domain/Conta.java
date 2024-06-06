@@ -28,13 +28,22 @@ public class Conta implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
 	private Long numero;
 	
 	@ManyToOne
 	@JoinColumn(name = "agencia_id")
 	private Agencia agencia;
 	
-	@NotNull
 	private BigDecimal saldo;
+	
+	private Boolean ativa;
+
+	public Conta(@NotNull Long numero, Agencia agencia, BigDecimal saldo, Boolean ativa) {
+		this.numero = numero;
+		this.agencia = agencia;
+		this.saldo = saldo;
+		this.ativa = ativa;
+	}
 	
 }
