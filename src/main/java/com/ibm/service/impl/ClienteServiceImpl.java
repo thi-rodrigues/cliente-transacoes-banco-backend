@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.ibm.domain.Cliente;
@@ -56,6 +58,15 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public void debitar(@Valid TransacaoRecord transacaoRecord) {
 		contaService.debitar(transacaoRecord.valor(), transacaoRecord.numeroConta(), transacaoRecord.idCliente());
+	}
+
+	@Override
+	public Page<ClienteDTO> buscarTodos(int page, int size) {
+		return clienteRepository.buscarTodos(obterRequisicaoPaginada(page,  size));
+	}
+	
+	private PageRequest obterRequisicaoPaginada(int page, int size) {
+		return PageRequest.of(page, size);
 	}
 
 }

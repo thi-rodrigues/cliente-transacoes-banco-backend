@@ -1,6 +1,7 @@
 package com.ibm.resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,13 @@ public class ClienteController {
 	@PostMapping("/save")
 	public ResponseEntity<ClienteRecord> save(@Valid @RequestBody ClienteRecord clienteRecord) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(clienteRecord));
+	}
+	
+	@GetMapping("/all")
+	public ResponseEntity<Page<ClienteDTO>> buscarTodos(
+			@RequestParam(value = "page", required = false, defaultValue = "0") int page,
+			@RequestParam(value = "size", required = false, defaultValue = "5") int size) {
+		return ResponseEntity.ok(clienteService.buscarTodos(page, size));
 	}
 	
 	@GetMapping("/buscar")
