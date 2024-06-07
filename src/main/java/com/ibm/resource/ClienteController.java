@@ -39,8 +39,8 @@ public class ClienteController {
 	
 	@GetMapping("/buscar")
 	public ResponseEntity<ClienteDTO> buscar(@RequestParam("agencia") String agencia, 
-			@RequestParam("conta") String conta, @RequestParam("senha") String senha) {
-		return ResponseEntity.ok(clienteService.buscar(agencia, conta, senha));
+			@RequestParam("conta") String conta) {
+		return ResponseEntity.ok(clienteService.buscar(agencia, conta));
 	}
 	
 	@PostMapping("/depositar")

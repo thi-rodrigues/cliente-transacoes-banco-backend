@@ -42,8 +42,8 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 
 	@Override
-	public ClienteDTO buscar(String agencia, String conta, String senha) {
-		Optional<Cliente> cliente = clienteRepository.buscar(agencia, conta, senha);
+	public ClienteDTO buscar(String agencia, String conta) {
+		Optional<Cliente> cliente = clienteRepository.buscar(agencia, conta);
 		ClienteDTO clienteDTO = new ClienteDTO();
 
 		cliente.ifPresent(c -> BeanUtils.copyProperties(c, clienteDTO));

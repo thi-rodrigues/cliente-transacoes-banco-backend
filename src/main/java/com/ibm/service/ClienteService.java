@@ -10,7 +10,7 @@ public interface ClienteService {
 
 	ClienteRecord save(ClienteRecord clienteRecord);
 
-	ClienteDTO buscar(String agencia, String conta, String senha);
+	ClienteDTO buscar(String agencia, String conta);
 	
 	void depositar(TransacaoRecord transacaoRecord);
 

@@ -14,10 +14,10 @@ import com.ibm.record.ClienteDTO;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
-	@Query("FROM Cliente c WHERE c.senha = :senha "
+	@Query("FROM Cliente c WHERE 1=1 "
 			+ " and c.conta.numero = :numeroConta "
 			+ " and c.conta.agencia.numero = :numeroAgencia ")
-	Optional<Cliente> buscar(String numeroAgencia, String numeroConta, String senha);
+	Optional<Cliente> buscar(String numeroAgencia, String numeroConta);
 	
 	@Query("FROM Cliente")
 	Page<ClienteDTO> buscarTodos(Pageable pageable);
