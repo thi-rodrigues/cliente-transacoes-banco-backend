@@ -39,7 +39,7 @@ public class Conta implements Serializable {
 	
 	private Boolean ativa;
 
-	public Conta(@NotNull Long numero, Agencia agencia, BigDecimal saldo, Boolean ativa) {
+	public Conta(Long numero, Agencia agencia, BigDecimal saldo, Boolean ativa) {
 		this.numero = numero;
 		this.agencia = agencia;
 		this.saldo = saldo;

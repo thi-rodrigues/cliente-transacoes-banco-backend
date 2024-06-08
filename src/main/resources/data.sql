@@ -1,6 +1,11 @@
-INSERT INTO ibm.agencia
-(id, numero)
-VALUES(1, 100);
-INSERT INTO ibm.agencia
-(id, numero)
-VALUES(2, 200);
+--SET MODE MySQL;
+
+CREATE TABLE AGENCIA (
+  id bigint NOT NULL AUTO_INCREMENT,
+  numero bigint NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+ 
+SELECT * FROM AGENCIA;
+
+INSERT INTO AGENCIA(id, numero) VALUES(1, 100);

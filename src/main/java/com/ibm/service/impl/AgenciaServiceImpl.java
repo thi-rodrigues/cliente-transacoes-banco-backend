@@ -1,6 +1,6 @@
 package com.ibm.service.impl;
 
-import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +16,19 @@ public class AgenciaServiceImpl implements AgenciaService {
 	private AgenciaRepository agenciaRepository;
 
 	@Override
-	public List<Agencia> findAll() {
-		return agenciaRepository.findAll();
+	public Agencia save(Agencia agencia) {
+		agencia.setNumero(gerarNumeroAgencia().longValue());
+		return agenciaRepository.save(agencia);
+	}
+	
+	private Integer gerarNumeroAgencia() {
+		Random random = new Random();
+		Integer agencia = new Random().nextInt();
+		
+		if (agencia < 0) 
+			return random.nextInt() * (-1);
+		
+		return agencia;
 	}
 	
 }

@@ -1,7 +1,6 @@
 package com.ibm.service.impl;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +23,8 @@ public class ContaServiceImpl implements ContaService {
 	
 	@Override
 	public Conta save(ContaRecord contaRecord) {
-		List<Agencia> agencias = agenciaService.findAll();
-		// TODO: referenciar conta a agencia
-		return contaRepository.save(new Conta(contaRecord.numero(), agencias.get(0), BigDecimal.ZERO, false));
+		Agencia agencia = agenciaService.save(new Agencia());
+		return contaRepository.save(new Conta(contaRecord.numero(), agencia, BigDecimal.ZERO, false));
 	}
 
 	@Override
