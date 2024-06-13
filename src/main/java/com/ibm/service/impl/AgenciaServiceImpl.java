@@ -22,11 +22,10 @@ public class AgenciaServiceImpl implements AgenciaService {
 	}
 	
 	private Integer gerarNumeroAgencia() {
-		Random random = new Random();
 		Integer agencia = new Random().nextInt();
 		
 		if (agencia < 0) 
-			return random.nextInt() * (-1);
+			return agencia * (-1);
 		
 		return agencia;
 	}
