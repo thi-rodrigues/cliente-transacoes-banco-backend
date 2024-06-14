@@ -21,14 +21,12 @@ public class ClienteDTO {
 	private LocalDate dtNascimento;
 	private Conta conta;
 	
-	public ClienteDTO(Cliente c) {
-		this.nome = c.getNome();
-		this.email = c.getEmail();
-		this.dtNascimento = c.getDtNascimento();
-		this.conta = c.getConta();
+	public ClienteDTO(Cliente cliente) {
+		this.id = cliente.getId();
+		this.nome = cliente.getNome();
+		this.email = cliente.getEmail();
+		this.dtNascimento = cliente.getDtNascimento();
+		this.conta = cliente.getConta();
 	}
-
-	
-	
 
 }

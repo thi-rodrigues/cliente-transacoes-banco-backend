@@ -13,9 +13,11 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "CLIENTE")
+@NoArgsConstructor
 public class Cliente implements Serializable {
 
 	private static final long serialVersionUID = -8584312237926057339L;
@@ -40,7 +42,15 @@ public class Cliente implements Serializable {
 	
 	@Column(name = "DT_NASCIMENTO")
 	private LocalDate dtNascimento;
+	
+	public Cliente(Long id) {
+		this.id = id;
+	}
 
+	public Long getId() {
+		return id;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -81,8 +91,4 @@ public class Cliente implements Serializable {
 		this.dtNascimento = dtNascimento;
 	}
 
-	public Long getId() {
-		return id;
-	}
-	
 }
