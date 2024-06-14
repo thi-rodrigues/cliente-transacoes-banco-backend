@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.ibm.domain.Cliente;
-import com.ibm.record.ClienteDTO;
+import com.ibm.domain.dto.ClienteDTO;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
@@ -21,5 +21,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 	
 	@Query("FROM Cliente")
 	Page<ClienteDTO> buscarTodos(Pageable pageable);
+	
+	@Query("FROM Cliente c WHERE c.id = :id")
+	ClienteDTO buscarPorId(Long id);
 
 }

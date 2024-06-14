@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ibm.domain.Cliente;
 import com.ibm.domain.Conta;
-import com.ibm.record.ClienteDTO;
+import com.ibm.domain.dto.ClienteDTO;
 import com.ibm.record.ClienteRecord;
 import com.ibm.record.TransacaoRecord;
 import com.ibm.repository.ClienteRepository;
@@ -63,6 +63,11 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public Page<ClienteDTO> buscarTodos(int page, int size) {
 		return clienteRepository.buscarTodos(obterRequisicaoPaginada(page,  size));
+	}
+	
+	@Override
+	public ClienteDTO buscarPorId(Long idCliente) {
+		return clienteRepository.buscarPorId(idCliente);
 	}
 	
 	private PageRequest obterRequisicaoPaginada(int page, int size) {

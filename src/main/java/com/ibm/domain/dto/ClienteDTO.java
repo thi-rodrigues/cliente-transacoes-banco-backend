@@ -1,4 +1,4 @@
-package com.ibm.record;
+package com.ibm.domain.dto;
 
 import java.time.LocalDate;
 
@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ClienteDTO {
 
-	
 	private Long id;
 	private String nome;
 	private String email;
